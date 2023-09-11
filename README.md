@@ -10,7 +10,7 @@
 
     GET api/v1/tasks
 
-*QueryParams:*
+*Filter Query Params:*
 
 - **search** `string` `optional`
 - **status** `string|integer(todo; done)` `optional`
