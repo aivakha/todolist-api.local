@@ -3,6 +3,8 @@
 namespace App\Services\Api\V1;
 
 use App\Enums\TaskStatus;
+use App\Exceptions\Api\V1\Task\TaskDeleteException;
+use App\Exceptions\Api\V1\Task\TaskUpdateException;
 use App\Models\Task;
 
 class TaskService
@@ -12,28 +14,21 @@ class TaskService
         return Task::create($data);
     }
 
-    /**
-     * @throws \Exception
-     */
     public function update(Task $task, array $data): Task
     {
-        if ((int) $data['status'] === TaskStatus::DONE->value && $task->hasUncompletedSubtasks()) {
-            throw new \Exception('Cannot mark as "DONE" while subtasks have "TODO" status.');
-        }
+        throw_if(
+            (int) $data['status'] === TaskStatus::DONE->value && $task->hasUncompletedSubtasks(),
+            TaskUpdateException::class
+        );
 
         $task->update($data);
 
         return $task;
     }
 
-    /**
-     * @throws \Exception
-     */
     public function delete(Task $task): void
     {
-        if ($task->isDone()) {
-            throw new \Exception('Cannot delete task with status "DONE".');
-        }
+        throw_if($task->isDone(),TaskDeleteException::class);
 
         $task->subtasks->each->delete();
         $task->delete();

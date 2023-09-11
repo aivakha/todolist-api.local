@@ -18,6 +18,17 @@ class Handler extends ExceptionHandler
         'password_confirmation',
     ];
 
+    public function render($request, Throwable $e)
+    {
+
+        if ($request->is('api/*')) {
+            return response()->json([
+                'error' => $e->getMessage(),
+                'code' => $e->getCode(),
+            ], $e->getCode() ?: 500);
+        }
+    }
+
     /**
      * Register the exception handling callbacks for the application.
      */
