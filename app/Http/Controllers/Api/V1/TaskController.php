@@ -28,7 +28,7 @@ class TaskController extends Controller
 
         $filter = app()->make(Filter::class, ['queryParams' => array_filter($data)]);
 
-        $tasks = Task::filter($filter)->get();
+        $tasks = Task::filter($filter)->where('user_id', auth()->user()->id)->get();
 
         return new TaskCollection($tasks);
     }

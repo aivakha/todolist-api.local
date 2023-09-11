@@ -13,6 +13,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        Task::factory(3)->create();
+        Task::factory(200)->create();
     }
 }
