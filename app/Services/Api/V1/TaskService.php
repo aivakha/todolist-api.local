@@ -26,6 +26,15 @@ class TaskService
         return $task;
     }
 
+    public function setCompleted(Task $task): Task
+    {
+        throw_if($task->hasUncompletedSubtasks(),TaskUpdateException::class);
+
+        $task->update(['status' => TaskStatus::DONE->value]);
+
+        return $task;
+    }
+
     public function delete(Task $task): void
     {
         throw_if($task->isDone(),TaskDeleteException::class);

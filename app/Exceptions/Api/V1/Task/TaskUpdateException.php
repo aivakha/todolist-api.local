@@ -9,5 +9,5 @@ class TaskUpdateException extends Exception
 {
     protected $code = Response::HTTP_METHOD_NOT_ALLOWED;
 
-    protected $message = 'Cannot mark as "DONE" while subtasks have "TODO" status.';
+    protected $message = 'Cannot mark as "DONE" while task or subtasks have "TODO" status.';
 }

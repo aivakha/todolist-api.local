@@ -47,7 +47,7 @@
 ****TASK UPDATE****
 
 
-    PUT api/v1/tasks/{id}
+    PUT api/v1/tasks/{task}
 
 *Body:*
 
@@ -66,8 +66,11 @@
 - **parentId** `null` `integer` `optional`
 - **completedAt** `date` `optional`
 
+****TASK SET COMPLETED****
+
+    PUT api/v1/tasks/{task}/completed
 
 ****TASK DELETE****
 
-    DELETE api/v1/tasks/{id}
+    DELETE api/v1/tasks/{task}
    

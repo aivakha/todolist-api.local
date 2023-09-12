@@ -40,6 +40,8 @@ class Task extends Model
             }
         }
 
+        $this->unsetRelation('subtasks');
+
         return false;
     }
 }

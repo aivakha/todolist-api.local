@@ -17,6 +17,11 @@ class TaskPolicy
         return $user->id === $task->user_id;
     }
 
+    public function completed(User $user, Task $task): bool
+    {
+        return $user->id === $task->user_id;
+    }
+
     public function delete(User $user, Task $task): bool
     {
         return $user->id === $task->user_id;

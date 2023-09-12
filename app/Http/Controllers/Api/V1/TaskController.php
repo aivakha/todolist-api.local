@@ -53,6 +53,15 @@ class TaskController extends Controller
         return new TaskResource($task);
     }
 
+    public function completed(Task $task)
+    {
+        $this->authorize('completed', $task);
+
+        $task = $this->taskService->setCompleted($task);
+
+        return new TaskResource($task);
+    }
+
     public function destroy(Task $task)
     {
         $this->authorize('delete', $task);
